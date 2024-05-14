@@ -1,0 +1,90 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processing</title>
+</head>
+<body>
+    <h1>Image Processing</h1>
+    <form action="/gray_conversion" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Convert to Grayscale</button>
+    </form>
+    
+    <form action="/cropping" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <input type="number" name="x" placeholder="X coordinate">
+        <input type="number" name="y" placeholder="Y coordinate">
+        <input type="number" name="w" placeholder="Width">
+        <input type="number" name="h" placeholder="Height">
+        <button type="submit">Crop Image</button>
+    </form>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Processing</title>
+  </head>
+  <body>
+    <h1>Image Processing</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="image" accept="image/*" /><br /><br />
+      <input type="number" name="x" placeholder="X coordinate" required>
+      <input type="number" name="y" placeholder="Y coordinate" required>
+      <input type="number" name="w" placeholder="Width" required>
+      <input type="number" name="h" placeholder="Height" required>
+
+      <select name="operation">
+        <option value="gray">Gray Transformation</option>
+        <option value="binary">Binary Transformation</option>
+        <option value="rotate">Image Rotation</option>
+        <option value="Image Cropping">Image Cropping</option>
+        <option value="Image Zoom In/Out">Image Zoom In/Out</option>
+        <option value="Color Space Transformations">
+          Color Space Transformations
+        </option>
+        <option value=" image histograms">
+          Stretching/expanding the histogram of the input image and the original
+          image histogram
+        </option>
+        <option value="Arithmetic operations">
+          Arithmetic operations (addition, multiplication) between two images
+        </option>
+        <option value="Brightness boost">Brightness boost</option>
+        <option value="Convolution Operation">
+          Convolution Operation (gauss)
+        </option>
+        <option value="Thresholding operations">
+          Thresholding operations (Adaptive Thresholding)
+        </option>
+        <option value="Use of Edge Detection Algorithms">
+          Use of Edge Detection Algorithms (sobel)
+        </option>
+        <option value="Applying a Filter to the Image">
+          Applying a Filter to the Image (Blurring)
+        </option>
+        <option value="Morphological Processes">
+          Morphological Processes (Expansion, Wear, Opening, Closing)
+        </option></select
+      ><br /><br />
+      <input type="submit" value="Process Image" />
+    </form>
+    {% if image_path %}
+    <h2>Original Image</h2>
+    <img src="{{ image_path }}" width="400" /><br /><br />
+    {% endif %} {% if processed_image_path %}
+    <h2>Processed Image</h2>
+    <img src="{{ processed_image_path }}" width="400" /><br /><br />
+    {% endif %} {% if encoded_image %}
+    <h2>Encoded Image</h2>
+    <img
+      src="data:image/jpeg;base64,{{ encoded_image }}"
+      width="400"
+    /><br /><br />
+    {% endif %}
+  </body>
+</html>
